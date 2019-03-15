@@ -1,0 +1,41 @@
+.login-header {
+    width: 320px;
+    padding: 5px;
+    margin: auto;
+    margin-top: 100px;
+    text-align: left;
+}
+
+.subhead {
+    width: 380px;
+    margin: auto;
+    font-size: 24px;
+}
+
+main {
+    text-align: center;
+}
+
+form {
+    max-width: 640px;
+    margin: auto;
+}
+
+.login-input {
+    width: 300px;
+    margin: auto;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.submit-login {
+    width: 300px;
+    padding: 5px;
+}
+
+hr {
+    position: relative;
+    bottom: 38px;
+    left: 40px;
+    width: 228px;
+}

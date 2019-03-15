@@ -1,0 +1,49 @@
+.landing-header {
+    margin-top: 75px;
+    padding: 5px;
+    text-align: center;
+    font-size: 34px;
+}
+
+.landing-subhead {
+    font-size: 28px;
+}
+
+a {
+    text-decoration: none;
+    color: #333333;
+}
+
+main {
+    margin-top: 1%;
+}
+
+section {
+    padding: 20px;
+    text-align: center;
+}
+
+.find, .play {
+    background: #969696;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.to-register-page {
+    width: 100%;
+    text-align: center;
+}
+
+.to-register-page {
+    margin-top: 10%;
+}
+
+.to-register-text {
+    position: relative;
+    bottom: 70px;
+    left: 69px;
+}
+
+img {
+    width: 75px;
+}

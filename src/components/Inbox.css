@@ -1,0 +1,28 @@
+.inbox-section {
+    max-width: 640px;
+    margin: auto;
+    text-align: left;
+    background: #c2c2c2;
+}
+
+.messages-h3 {
+    display: inline-block;
+    margin: 1px 1px 1px 1px;
+}
+
+.messages-list {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.message-li {
+    margin-bottom: 7px;
+    padding: 10px 2px 10px 3px;
+    border: 1px solid black;
+}
+
+#msg-reply #msg-delete {
+    width: 35px;
+    margin: auto;
+    background: #ebebeb;
+}

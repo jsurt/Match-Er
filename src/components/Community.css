@@ -1,0 +1,39 @@
+.community-header {
+    margin-top: 75px;
+    margin-left: 15px;
+}
+
+.community-header > h1 {
+    font-size: 32px;
+}
+
+.community-header > p {
+    font-size: 20px;
+}
+
+.community-li {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+}
+
+.user-filter-wrap {
+    margin: auto;
+}
+
+.radio-btn-wrap {
+    width: 50px;
+    margin: 5px;
+}
+
+.radio-btn-label {
+    margin-right: 25px;
+}
+
+.radio-btn-wrap.country {
+    background: #919191;
+}
+
+.radio-btn-wrap.state {
+    background: #e2e2e2;
+}

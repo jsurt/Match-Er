@@ -1,0 +1,9 @@
+.user-panel {
+    max-width: 640px;
+    margin: auto;
+    margin-top: 55px;
+    padding: 10px;
+    text-align: center;
+    background: #989898;
+    border-radius: 0px;
+}

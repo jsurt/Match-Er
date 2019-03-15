@@ -1,0 +1,38 @@
+.signup-header {
+    margin-top: 125px;
+    text-align: center;
+}
+
+.signup-subhead {
+    width: 320px;
+    margin: auto;
+    font-size: 24px;
+}
+
+.login {
+    color: #aaaaaa;
+}
+
+main {
+    margin-top: 25px;
+    text-align: center;
+}
+
+form {
+    max-width: 640px;
+    margin: auto;
+}
+
+.signup-input {
+    width: 300px;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.submit-signup {
+    display: block; 
+    margin: auto;
+    margin-top: 10px;
+    max-width: 320px;
+    padding: 5px;
+}

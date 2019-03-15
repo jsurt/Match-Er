@@ -1,5 +1,12 @@
- language: node_js
- node_js: node
- cache:
-   directories:
-     - node_modules
+language: node_js
+node_js: node
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: heroku
+  api_key:
+    secure: ufpelEh0/Vp9n52Mo89P1Vrm3UZP7YXoF37Y8MFZKphLs28UYWuFsWBqhD1XRpIs11VXo4Qp3JlpZlfUWVYoieDNq17FXnBosgVhaS3KjJqwBDxjEU7Jgbnzr4SPqxR4S88b91DhcdLiuetlg+qMpU6zL+wQeniO1kk/TQ+4TJ/JqWYLZyOfAr/ysPBVwurGMzeV/sZWrNBm8wyxSDxAh4daZmc3FddFgk/Sl+EBCCLZmlhHgLRDHXt2JVzqM6wVDKYKrSXOBAQ6x4OawX/6KIOK0pR8desKUyY53rfOSKqunf/+RcxhH0ii9208hEJFX35Z4HBS3AJGY0VaEBK47JJcjhke9OsH5FI4X7KW+JfubEzpCove1em4+gL84mSajrf8VWgOP+Y14Uq1IpPshzci0JgFKbZESy+zO6WQPeKlGg8Smu5SfQ4tnLce7ayw9JLL6HjnOsntdFAjgdFAKKjsSxWCbCHbkrXJpvW1wKtlL98s3zpMfhNp6/JspxB2d4uQmSzmV/h8Fogie8/YrwzAhetX9vouSnMSterwwqteaTIyuavQVTZZJDWQEYvfO68Tmop+Lf7GPKpezr6yrHd0iHo+Tk6ISKra86yQxhCKvSVdrdxfjN87ti6TU5ABNlHiPu/m9xWU1QF82EjphPjQF04fO0lSojMTc2qpTAY=
+  app: intense-headland-64831
+  on:
+    repo: jsurt/React-Capstone-Client
