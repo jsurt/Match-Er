@@ -20,7 +20,7 @@ export default class Inbox extends React.Component {
       <React.Fragment>
         <section className="inbox-section">
           <h3 className="messages-h3">Inbox</h3>
-          <span className="messages-count">{this.props.messageCount}</span>
+          <span className="messages-count"> ({this.props.messageCount})</span>
           <ul className="messages-list">{messages}</ul>
         </section>
       </React.Fragment>

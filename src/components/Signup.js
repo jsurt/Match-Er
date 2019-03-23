@@ -1,8 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/register";
 import "./Signup.css";
 
-export default class Signup extends React.Component {
+class Signup extends React.Component {
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.dispatch(registerUser());
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -15,12 +28,14 @@ export default class Signup extends React.Component {
         </header>
         <main>
           <section>
-            <form>
+            <form onSubmit={e => this.handleSubmit(e)}>
               <input
                 type="text"
                 id="firstname"
                 placeholder="Firstname"
                 className="signup-input"
+                name="firstname"
+                onChange={e => this.handleChange(e)}
               />
               <br />
               <input
@@ -28,6 +43,8 @@ export default class Signup extends React.Component {
                 id="lastname"
                 placeholder="Lastname"
                 className="signup-input"
+                name="lastname"
+                onChange={e => this.onChange(e)}
               />
               <br />
               <input
@@ -35,6 +52,8 @@ export default class Signup extends React.Component {
                 id="email"
                 placeholder="Email"
                 className="signup-input"
+                name="email"
+                onChange={e => this.onChange(e)}
               />
               <br />
               <input
@@ -42,6 +61,8 @@ export default class Signup extends React.Component {
                 id="password"
                 placeholder="Password"
                 className="signup-input"
+                name="password"
+                onChange={e => this.onChange(e)}
               />
               <br />
               <input
@@ -49,10 +70,16 @@ export default class Signup extends React.Component {
                 id="confirm-password"
                 placeholder="Confirm password"
                 className="signup-input"
+                name="confirmPassword"
+                onChange={e => this.onChange(e)}
               />
               <br />
               <label htmlFor="state">What state do you live in?</label>
-              <select className="state">
+              <select
+                className="state"
+                name="state"
+                onChange={e => this.onChange(e)}
+              >
                 <option value="" defaultValue disabled>
                   Select a state
                 </option>
@@ -116,3 +143,9 @@ export default class Signup extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  register: state.register
+});
+
+export default connect(mapStateToProps)(Signup);

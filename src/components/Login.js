@@ -2,6 +2,25 @@ import React from "react";
 import "./Login.css";
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+  }
+
+  onChange(event) {
+    console.log(event.target.value, event.target.name);
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -11,12 +30,16 @@ export default class Login extends React.Component {
         </header>
         <main>
           <section>
-            <form action="">
+            <form action="" onSubmit={this.onSubmit}>
               <input
                 type="text"
                 id="username"
                 placeholder="Username"
                 className="login-input"
+                name="username"
+                onChange={e => {
+                  this.onChange(e);
+                }}
               />
               <br />
               <input
@@ -24,6 +47,10 @@ export default class Login extends React.Component {
                 id="password"
                 placeholder="Password"
                 className="login-input"
+                name="password"
+                onChange={e => {
+                  this.onChange(e);
+                }}
               />
               <br />
               <button type="submit" className="submit-login">

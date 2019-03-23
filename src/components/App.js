@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import { connect } from "react-redux";
 
 import Landing from "./Landing";
 import Navigation from "./Navigation";
@@ -9,7 +11,13 @@ import Dashboard from "./Dashboard";
 import Community from "./Community";
 import "./App.css";
 
-export default class App extends React.Component {
+export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      test: "this is a test"
+    };
+  }
   render() {
     return (
       <Router>
