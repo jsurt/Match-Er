@@ -39,6 +39,7 @@ class Dashboard extends React.Component {
             username={this.props.user.username}
             state={this.props.user.state}
           />
+          <Friends friends={this.props.user.friends} />
           <Inbox
             messageCount={this.props.message.messageCount}
             messages={this.props.message.messages}
