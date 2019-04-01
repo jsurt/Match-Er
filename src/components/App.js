@@ -12,12 +12,6 @@ import Community from "./Community";
 import "./App.css";
 
 export class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      test: "this is a test"
-    };
-  }
   render() {
     return (
       <Router>

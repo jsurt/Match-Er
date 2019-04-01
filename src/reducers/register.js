@@ -1,27 +1,21 @@
-import { REGISTER_USER_SUCCESS, registerUser } from "../actions/register";
+import { USER_LOGIN_SUCCESS, USER_LOGOUT } from "../actions/auth";
 
 const initialState = {
-  firstname: "",
-  lastname: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-  state: ""
+  loggedIn: false
 };
 
-export const registerReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REGISTER_USER_SUCCESS:
-      console.log("Registering user");
+    case USER_LOGIN_SUCCESS:
+      console.log(action.type);
       return Object.assign({}, state, {
-        firstname: action.firstname,
-        lastname: action.lastname,
-        email: action.email,
-        password: action.password,
-        state: action.state
+        loggedIn: action.payload
       });
-    //case REGISTER_USER_ERROR:
-    //console.log("error");
+    case USER_LOGOUT:
+      console.log(action.type);
+      return Object.assign({}, state, {
+        loggedIn: action.payload
+      });
     default:
       return state;
   }

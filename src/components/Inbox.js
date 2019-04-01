@@ -1,6 +1,6 @@
 import React from "react";
-
 import Message from "./Message";
+import ReplyMessage from "./ReplyMessage";
 import "./Inbox.css";
 
 export default class Inbox extends React.Component {
@@ -8,12 +8,7 @@ export default class Inbox extends React.Component {
     const messages = this.props.messages.map((msg, index) => (
       <li key={index} className="message-li">
         <Message {...msg} />
-        <button type="submit" id="msg-reply">
-          Reply
-        </button>
-        <button type="submit" id="msg-delete">
-          Delete
-        </button>
+        <ReplyMessage />
       </li>
     ));
     return (

@@ -1,7 +1,9 @@
 import React from "react";
+import { login } from "../actions/auth";
+import { connect } from "react-redux";
 import "./Login.css";
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,12 +12,17 @@ export default class Login extends React.Component {
     };
   }
 
-  onSubmit(event) {
+  handleSubmit(event) {
     event.preventDefault();
+    const { username, password } = this.state;
+    //debugger;
+    this.props.dispatch(login(username, password)).then(() => {
+      console.log("Logged in");
+      this.props.history.push("/dashboard");
+    });
   }
 
-  onChange(event) {
-    console.log(event.target.value, event.target.name);
+  handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -30,7 +37,7 @@ export default class Login extends React.Component {
         </header>
         <main>
           <section>
-            <form action="" onSubmit={this.onSubmit}>
+            <form action="" onSubmit={e => this.handleSubmit(e)}>
               <input
                 type="text"
                 id="username"
@@ -38,7 +45,7 @@ export default class Login extends React.Component {
                 className="login-input"
                 name="username"
                 onChange={e => {
-                  this.onChange(e);
+                  this.handleChange(e);
                 }}
               />
               <br />
@@ -49,7 +56,7 @@ export default class Login extends React.Component {
                 className="login-input"
                 name="password"
                 onChange={e => {
-                  this.onChange(e);
+                  this.handleChange(e);
                 }}
               />
               <br />
@@ -63,3 +70,9 @@ export default class Login extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  register: state.register
+});
+
+export default connect(mapStateToProps)(Login);

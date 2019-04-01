@@ -1,13 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerUser } from "../actions/register";
+import { registerUser } from "../actions/users";
+import { login } from "../actions/auth";
 import "./Signup.css";
 
 class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstname: "",
+      lastname: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+      state: ""
+    };
+  }
   handleSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(registerUser());
+    const signUpData = this.state;
+    //debugger;
+    this.props.dispatch(registerUser(signUpData)).then(() => {
+      console.log("User signed up");
+      const { username, password } = this.state;
+      this.props
+        .dispatch(login(username, password))
+        .then(() => this.props.history.push("/dashboard"));
+      ////debugger;);
+    });
   }
 
   handleChange(event) {
@@ -17,6 +38,8 @@ class Signup extends React.Component {
   }
 
   render() {
+    const testToken = localStorage.getItem("token");
+    console.log(testToken);
     return (
       <React.Fragment>
         <header className="signup-header">
@@ -44,16 +67,16 @@ class Signup extends React.Component {
                 placeholder="Lastname"
                 className="signup-input"
                 name="lastname"
-                onChange={e => this.onChange(e)}
+                onChange={e => this.handleChange(e)}
               />
               <br />
               <input
                 type="text"
-                id="email"
-                placeholder="Email"
+                id="username"
+                placeholder="Username"
                 className="signup-input"
-                name="email"
-                onChange={e => this.onChange(e)}
+                name="username"
+                onChange={e => this.handleChange(e)}
               />
               <br />
               <input
@@ -62,7 +85,7 @@ class Signup extends React.Component {
                 placeholder="Password"
                 className="signup-input"
                 name="password"
-                onChange={e => this.onChange(e)}
+                onChange={e => this.handleChange(e)}
               />
               <br />
               <input
@@ -71,14 +94,14 @@ class Signup extends React.Component {
                 placeholder="Confirm password"
                 className="signup-input"
                 name="confirmPassword"
-                onChange={e => this.onChange(e)}
+                onChange={e => this.handleChange(e)}
               />
               <br />
               <label htmlFor="state">What state do you live in?</label>
               <select
                 className="state"
                 name="state"
-                onChange={e => this.onChange(e)}
+                onChange={e => this.handleChange(e)}
               >
                 <option value="" defaultValue disabled>
                   Select a state
