@@ -27,8 +27,10 @@ export const messageReducer = (state = initialState, action) => {
       console.log("Error");
       break;
     default:
-      console.log("Default");
-      break;
+      console.log("Returning state");
+      return {
+        ...state
+      };
   }
   return state;
 };

@@ -1,13 +1,16 @@
 import React from "react";
-
+import { deleteFriend, sendMessage } from "../actions/index";
+import { dispatch } from "rxjs/internal/observable/range";
+import { connect } from "react-redux";
 //import sendMessage from "../actions/sendMessage";
 
-export default class WriteMessage extends React.Component {
+class WriteMessage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       editing: false,
-      message: ""
+      message: "",
+      id: this.props._id
     };
   }
 
@@ -24,8 +27,14 @@ export default class WriteMessage extends React.Component {
   }
 
   handleSendMessage(event) {
-    const msg = this.state.message;
-    this.props.dipatch(this.handleSendMessage(msg));
+    const receiverId = this.state.id;
+    const content = this.state.message;
+    const date = new Date();
+    const dateNeat = date.toLocaleDateString("en-US");
+    this.props.dispatch(sendMessage(receiverId, content, dateNeat));
+    this.setState({
+      editing: false
+    });
   }
 
   handleCancelMessage(event) {
@@ -35,7 +44,8 @@ export default class WriteMessage extends React.Component {
   }
 
   handleDeleteFriend(event) {
-    console.log("Delete friend?");
+    const id = this.state.id;
+    this.props.dispatch(deleteFriend(id));
   }
 
   render() {
@@ -76,3 +86,5 @@ export default class WriteMessage extends React.Component {
     }
   }
 }
+
+export default connect()(WriteMessage);

@@ -17,7 +17,6 @@ class Login extends React.Component {
     const { username, password } = this.state;
     //debugger;
     this.props.dispatch(login(username, password)).then(() => {
-      console.log("Logged in");
       this.props.history.push("/dashboard");
     });
   }

@@ -1,11 +1,16 @@
 import React from "react";
 import { RaceOperator } from "rxjs/internal/observable/race";
+import { sendMessage } from "../actions/index";
+import { dispatch } from "rxjs/internal/observable/range";
+import { connect } from "react-redux";
 
-export default class ReplyMessage extends React.Component {
+class ReplyMessage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false
+      editing: false,
+      message: "",
+      id: this.props._id
     };
   }
 
@@ -30,6 +35,7 @@ export default class ReplyMessage extends React.Component {
   }
 
   render() {
+    console.log(this.state.id);
     if (!this.state.editing) {
       return (
         <React.Fragment>
@@ -61,3 +67,5 @@ export default class ReplyMessage extends React.Component {
     }
   }
 }
+
+export default connect()(ReplyMessage);

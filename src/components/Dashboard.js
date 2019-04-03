@@ -4,6 +4,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 import { getUserData, getUserMessages } from "../actions/index";
+import { userLoginSuccess } from "../actions/auth";
 import Friends from "./Friends";
 import Inbox from "./Inbox";
 import Navigation from "./Navigation";
@@ -11,17 +12,13 @@ import ProfileCard from "./ProfileCard";
 import "./Dashboard.css";
 
 class Dashboard extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   componentDidMount() {
-    //alert("about to get data");
+    this.props.dispatch(userLoginSuccess());
     console.log("Getting user data");
-    //debugger;
+    localStorage.getItem("");
     this.props.dispatch(getUserData()).then(() => {
       const id = this.props.user.id;
-      console.log(id);
+      //console.log(id);
       this.props
         .dispatch(getUserMessages(id))
         .then(() => console.log("Messages fetched"));
@@ -30,6 +27,7 @@ class Dashboard extends React.Component {
 
   render() {
     console.log("Dashboard has rendered");
+    //console.log(this.props.user.friends[0]);
     return (
       <React.Fragment>
         <main className="dashboard-main">

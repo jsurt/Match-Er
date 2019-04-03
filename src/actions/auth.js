@@ -15,7 +15,6 @@ export const userLogout = () => ({
 
 export const login = (username, password) => dispatch => {
   console.log("Logging user in");
-  //debugger;
   return fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
@@ -32,11 +31,9 @@ export const login = (username, password) => dispatch => {
     })
     .then(data => {
       console.log("Storing token now");
-      //debugger;
       dispatch(userLoginSuccess());
       localStorage.setItem("token", data.authToken);
       const token = localStorage.getItem("token");
-      //console.log(token);
     })
     .catch(err => console.error(err));
 };

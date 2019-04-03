@@ -17,6 +17,9 @@ export const authReducer = (state = initialState, action) => {
         loggedIn: action.payload
       });
     default:
-      return state;
+      console.log("Returning state");
+      return {
+        ...state
+      };
   }
 };
