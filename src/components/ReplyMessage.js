@@ -1,6 +1,6 @@
 import React from "react";
 import { RaceOperator } from "rxjs/internal/observable/race";
-import { sendMessage } from "../actions/index";
+import { sendMessage, deleteMessage } from "../actions/index";
 import { dispatch } from "rxjs/internal/observable/range";
 import { connect } from "react-redux";
 
@@ -10,7 +10,8 @@ class ReplyMessage extends React.Component {
     this.state = {
       editing: false,
       message: "",
-      id: this.props._id
+      id: this.props._id,
+      senderId: this.props.senderId
     };
   }
 
@@ -20,8 +21,22 @@ class ReplyMessage extends React.Component {
     });
   }
 
+  handleChange(event) {
+    this.setState({
+      message: event.target.value
+    });
+  }
+
   handleSendMessage(event) {
-    console.log("Sending message");
+    console.log(`Sending message to ${this.state.senderId}`);
+    const receiverId = this.state.senderId;
+    const content = this.state.message;
+    const date = new Date();
+    const dateNeat = date.toLocaleDateString("en-US");
+    this.props.dispatch(sendMessage(receiverId, content, date));
+    this.setState({
+      editing: false
+    });
   }
 
   handleCancelMessage(event) {
@@ -31,11 +46,13 @@ class ReplyMessage extends React.Component {
   }
 
   handleDeleteMessage(event) {
-    console.log("Delete message?");
+    const id = this.state.id;
+    console.log(`Deleting message with id ${id}`);
+    this.props.dispatch(deleteMessage(id));
   }
 
   render() {
-    console.log(this.state.id);
+    console.log(this.props.senderId);
     if (!this.state.editing) {
       return (
         <React.Fragment>
@@ -58,7 +75,7 @@ class ReplyMessage extends React.Component {
     } else {
       return (
         <div>
-          <textarea />
+          <textarea onChange={e => this.handleChange(e)} />
           <br />
           <button onClick={e => this.handleSendMessage(e)}>Send</button>
           <button onClick={e => this.handleCancelMessage(e)}>Cancel</button>

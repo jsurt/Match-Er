@@ -16,7 +16,7 @@ class ProfileCard extends React.Component {
               {this.props.fullName}
             </p>
             <p className="user-info this-username">{this.props.username}</p>
-            <p className="user-info this-user-state">{this.props.state}</p>
+            <p className="user-info this-user-state">{this.props.location}</p>
           </div>
         </section>
       </React.Fragment>

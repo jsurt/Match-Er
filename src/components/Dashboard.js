@@ -15,10 +15,9 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.dispatch(userLoginSuccess());
     console.log("Getting user data");
-    localStorage.getItem("");
     this.props.dispatch(getUserData()).then(() => {
       const id = this.props.user.id;
-      //console.log(id);
+      console.log(id);
       this.props
         .dispatch(getUserMessages(id))
         .then(() => console.log("Messages fetched"));
@@ -26,18 +25,26 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log("Dashboard has rendered");
-    //console.log(this.props.user.friends[0]);
+    console.log("Dashboard has rendered", this.props.user.friends);
+    const userData = this.props.user
+      ? this.props.user
+      : {
+          firstname: "",
+          lastname: "",
+          username: "",
+          location: "",
+          friends: ""
+        };
     return (
       <React.Fragment>
         <main className="dashboard-main">
           <ProfileCard
-            firstName={this.props.user.firstname}
-            lastName={this.props.user.lastname}
-            username={this.props.user.username}
-            state={this.props.user.state}
+            firstName={userData.firstname}
+            lastName={userData.lastname}
+            username={userData.username}
+            location={userData.location}
           />
-          <Friends friends={this.props.user.friends} />
+          <Friends friends={userData.friends} />
           <Inbox
             messageCount={this.props.message.messageCount}
             messages={this.props.message.messages}

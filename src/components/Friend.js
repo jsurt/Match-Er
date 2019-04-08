@@ -3,7 +3,7 @@ import React from "react";
 import "./Friend.css";
 
 export default function Friend(props) {
-  //console.log(props);
+  console.log(props);
   return (
     <React.Fragment>
       <span className="friend-info friend-name">{`${props.firstname} ${

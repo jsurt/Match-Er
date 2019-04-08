@@ -44,11 +44,13 @@ class WriteMessage extends React.Component {
   }
 
   handleDeleteFriend(event) {
-    const id = this.state.id;
+    const id = this.props._id;
+    console.log(id);
     this.props.dispatch(deleteFriend(id));
   }
 
   render() {
+    console.log(this.props._id, this.state.id);
     if (!this.state.editing) {
       return (
         <div>

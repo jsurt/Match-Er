@@ -14,7 +14,7 @@ class Signup extends React.Component {
       username: "",
       password: "",
       confirmPassword: "",
-      state: ""
+      location: ""
     };
   }
   handleSubmit(event) {
@@ -100,7 +100,7 @@ class Signup extends React.Component {
               <label htmlFor="state">What state do you live in?</label>
               <select
                 className="state"
-                name="state"
+                name="location"
                 onChange={e => this.handleChange(e)}
               >
                 <option value="" defaultValue disabled>

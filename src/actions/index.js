@@ -2,6 +2,28 @@ import { API_BASE_URL } from "../config";
 import { dispatch } from "rxjs/internal/observable/range";
 import { userInfo } from "os";
 
+export const GET_ALL_USERS_REQUEST = "GET_ALL_USERS_REQUEST";
+export const getAllUsersRequest = () => ({
+  type: GET_ALL_USERS_REQUEST
+});
+
+export const GET_ALL_USERS_SUCCESS = "GET_ALL_USERS_SUCCESS";
+export const getAllUsersSuccess = data => ({
+  type: GET_ALL_USERS_SUCCESS,
+  data
+});
+
+export const GET_ALL_USERS_ERROR = "GET_ALL_USERS_ERROR";
+export const getAllUsersError = () => ({
+  type: GET_ALL_USERS_ERROR
+});
+
+export const CHANGE_COMMUNITY_FILTER = "CHANGE_COMMUNITY_FILTER";
+export const changeCommunityFilterSuccess = filter => ({
+  type: CHANGE_COMMUNITY_FILTER,
+  filter
+});
+
 export const GET_USER_DATA_REQUEST = "GET_USER_DATA_REQUEST";
 export const getUserDataRequest = () => ({
   type: GET_USER_DATA_REQUEST
@@ -50,6 +72,12 @@ export const deleteFriendError = () => ({
   type: DELETE_FRIEND_ERROR
 });
 
+export const ADD_FRIEND_SUCCESS = "ADD_FRIEND_SUCCESS";
+export const addFriendSuccess = user => ({
+  type: ADD_FRIEND_SUCCESS,
+  user
+});
+
 export const SEND_MESSAGE_REQUEST = "SEND_MESSAGE_REQUEST";
 export const sendMessageRequest = () => ({
   type: SEND_MESSAGE_REQUEST
@@ -66,8 +94,51 @@ export const sendMessageError = () => ({
   type: SEND_MESSAGE_ERROR
 });
 
+export const DELETE_MESSAGE_REQUEST = "DELETE_MESSAGE_REQUEST";
+export const deleteMessageRequest = () => ({
+  type: DELETE_MESSAGE_REQUEST
+});
+
+export const DELETE_MESSAGE_SUCCESS = "DELETE_MESSAGE_SUCCESS";
+export const deleteMessageSuccess = id => ({
+  type: DELETE_MESSAGE_SUCCESS,
+  id
+});
+
+export const DELETE_MESSAGE_ERROR = "DELETE_MESSAGE_ERROR";
+export const deleteMessageError = () => ({
+  type: DELETE_MESSAGE_ERROR
+});
+
+export const getAllUsers = () => dispatch => {
+  const token = localStorage.getItem("token");
+  return fetch(`${API_BASE_URL}/users`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      console.log(res);
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      dispatch(getAllUsersSuccess(data));
+    })
+    .catch(err => {
+      console.error("Error", err);
+    });
+};
+
+export const changeCommunityFilter = filter => dispatch => {
+  console.log("Changing filter");
+  dispatch(changeCommunityFilterSuccess(filter));
+};
+
 export const getUserData = () => dispatch => {
-  dispatch(getUserDataRequest());
+  //dispatch(getUserDataRequest());
   //debugger;
   const token = localStorage.getItem("token");
   return fetch(`${API_BASE_URL}/users/data`, {
@@ -82,43 +153,18 @@ export const getUserData = () => dispatch => {
       return res.json();
     })
     .then(data => {
-      console.log(data.user.friends);
+      console.log(data);
       dispatch(getUserDataSuccess(data));
     })
     .catch(err => {
-      dispatch(getUserDataError());
-      console.error(err);
-    });
-};
-
-export const getUserMessages = id => dispatch => {
-  console.log("Getting messages");
-  dispatch(getUserMessagesRequest());
-  const token = localStorage.getItem("token");
-  return fetch(`${API_BASE_URL}/messages`, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${token}`
-    }
-  })
-    .then(res => {
-      console.log(res);
-      return res.json();
-    })
-    .then(data => {
-      dispatch(getUserMessagesSuccess(data));
-      console.log(data);
-    })
-    .catch(err => {
-      dispatch(getUserMessagesError());
+      //dispatch(getUserDataError());
       console.error(err);
     });
 };
 
 export const deleteFriend = id => dispatch => {
   console.log(`Deleting friend ${id}`);
-  dispatch(deleteFriendRequest());
+  //dispatch(deleteFriendRequest());
   const token = localStorage.getItem("token");
   return fetch(`${API_BASE_URL}/friends/${id}`, {
     method: "DELETE",
@@ -137,6 +183,50 @@ export const deleteFriend = id => dispatch => {
     });
 };
 
+export const addFriend = user => dispatch => {
+  const token = localStorage.getItem("token");
+  return fetch(`${API_BASE_URL}/friends/${user.id}`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      console.log("Friend add with id" + user.id, res);
+      dispatch(addFriendSuccess(user));
+    })
+    .catch(err => {
+      console.error(err);
+      //dispatch(deleteFriendError());
+    });
+};
+
+export const getUserMessages = id => dispatch => {
+  console.log("Getting messages");
+  //dispatch(getUserMessagesRequest());
+  const token = localStorage.getItem("token");
+  return fetch(`${API_BASE_URL}/messages`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      console.log(res);
+      return res.json();
+    })
+    .then(data => {
+      dispatch(getUserMessagesSuccess(data));
+      console.log(data);
+    })
+    .catch(err => {
+      //dispatch(getUserMessagesError());
+      console.error(err);
+    });
+};
+
 export const sendMessage = (receiverId, content, sentAt) => dispatch => {
   const subject = "subject";
   const msgBody = JSON.stringify({
@@ -146,7 +236,7 @@ export const sendMessage = (receiverId, content, sentAt) => dispatch => {
     sentAt
   });
   console.log("Sending message");
-  dispatch(sendMessageRequest);
+  //dispatch(sendMessageRequest);
   const token = localStorage.getItem("token");
   return fetch(`${API_BASE_URL}/messages`, {
     method: "POST",
@@ -163,4 +253,18 @@ export const sendMessage = (receiverId, content, sentAt) => dispatch => {
     .catch(err => {
       console.error("There was an error", err);
     });
+};
+
+export const deleteMessage = id => dispatch => {
+  console.log("Deleting message in actions");
+  const token = localStorage.getItem("token");
+  return fetch(`${API_BASE_URL}/messages/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(dispatch(deleteMessageSuccess(id)))
+    .catch(err => console.error("There was an error", err));
 };
