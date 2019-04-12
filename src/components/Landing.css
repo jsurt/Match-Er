@@ -51,19 +51,24 @@
     border-radius: 1px;
     color: #292929;
     background: #ffffffec;
-    -webkit-transition: transform 1s; 
-    transition: transform 1s;
+    transition: background-color 1s;
+    /* -webkit-transition: transform 0.5s; 
+    transition: transform 0.5s; */
+}
+
+.landing-login:hover, .landing-signup:hover {
+    cursor: pointer;
+    border-radius: 1px;
+    background-color: #e9e9e9;
+}
+
+/* .landing-login:hover {
+    border: 2px solid #007b22
 }
 
 .landing-signup:hover {
-    transform: rotateX(360deg);
-    cursor: pointer;
-}
-
-.landing-login:hover {
-    transform: rotateX(360deg);
-    cursor: pointer;
-}
+    border: 2px solid #f2ff00;
+} */
 
 a {
     text-decoration: none;
