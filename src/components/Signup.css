@@ -1,16 +1,29 @@
 .signup-header {
-    margin-top: 125px;
+    margin-top: 20px;
     text-align: center;
+    color: #ffffff;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .signup-subhead {
-    width: 320px;
+    width: 300px;
     margin: auto;
-    font-size: 24px;
+    font-size: 14px;
+    text-align: left;
+    font-family: 'Josefin Slab', serif;
 }
 
-.login {
-    color: #aaaaaa;
+.signup-section {
+    font-size: 0px;
+}
+
+.login-link, .landing-link {
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+
+.landing-link {
+    font-size: 14px;
 }
 
 main {
@@ -27,12 +40,34 @@ form {
     width: 300px;
     margin-bottom: 15px;
     padding: 5px;
+    border: none;
+    border-radius: 1px;
+    transition: display 1s;
 }
 
-.submit-signup {
-    display: block; 
+.state-select {
+    width: 300px;
+    background: #ffffff;
+    padding: 4px;
+    border: none;
+    border-radius: 1px;
+}
+
+.next-text-fld-btn {
+    margin-top: 15px;
+    width: 45px;
+    transition: transform 1s;
+}
+
+.next-text-fld-btn:hover {
+    cursor: pointer;
+}
+
+.errorMsg {
+    width: 300px;
     margin: auto;
-    margin-top: 10px;
-    max-width: 320px;
-    padding: 5px;
+    text-align: left;
+    font-size: 12px;
+    color: red;
+    font-family: 'Josefin Slab', serif;
 }

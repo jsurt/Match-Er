@@ -14,7 +14,7 @@
 }
 
 .opaque-background {
-    background: #00000066;
+    background: #000000a5;
 }
 
 .landing-header {
@@ -48,6 +48,7 @@
     width: 75px;
     padding: 7px 5px 8px 6px;
     border: none;
+    border-radius: 1px;
     color: #292929;
     background: #ffffffec;
     -webkit-transition: transform 1s; 
@@ -60,7 +61,7 @@
 }
 
 .landing-login:hover {
-    transform: rotateY(360deg);
+    transform: rotateX(360deg);
     cursor: pointer;
 }
 

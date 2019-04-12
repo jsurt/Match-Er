@@ -20,6 +20,7 @@ class App extends React.Component {
       <Router>
         <React.Fragment>
           <Navigation />
+          <Route path="*" component={Landing} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />

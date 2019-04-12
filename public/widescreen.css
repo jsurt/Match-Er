@@ -19,3 +19,7 @@
 .landing-login {
     margin-right: 188px;
 }
+
+.signup-header, .signup-subhead {
+    text-align: left;
+}
