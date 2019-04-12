@@ -17,12 +17,10 @@ class Navigation extends React.Component {
     console.log(this.props.auth.loggedIn);
     if (!loggedIn) {
       return (
-        <nav>
+        <nav role="navigation">
           <ul className="nav-list">
-            <li className="nav-item">
-              <Link to="/">
-                <img src="" alt="Match-Er logo" className="logo-img" />
-              </Link>
+            <li className="nav-item" onClick={e => this.handleLogout(e)}>
+              <Link to="/">Home</Link>
             </li>
             <li className="nav-item">
               <Link to="/signup">Signup</Link>
@@ -36,15 +34,16 @@ class Navigation extends React.Component {
     } else {
       console.log("User logged in");
       return (
-        <nav>
+        <nav role="navigation">
           <ul className="nav-list">
-            <li className="nav-item">
-              <Link to="/">
-                <img src="" alt="Match-Er logo" className="logo-img" />
-              </Link>
+            <li className="nav-item" onClick={e => this.handleLogout(e)}>
+              <Link to="/">Home</Link>
             </li>
             <li className="nav-item">
               <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/matches">Matches</Link>
             </li>
             <li className="nav-item">
               <Link to="/community">Community</Link>

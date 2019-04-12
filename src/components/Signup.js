@@ -14,21 +14,71 @@ class Signup extends React.Component {
       username: "",
       password: "",
       confirmPassword: "",
-      location: ""
+      location: "",
+      firstnameError: "",
+      lastnameError: "",
+      usernameError: "",
+      passwordError: "",
+      confirmPasswordError: "",
+      locationError: ""
     };
   }
+
+  resetErrors() {
+    this.setState({
+      firstnameError: "",
+      lastnameError: "",
+      usernameError: "",
+      passwordError: "",
+      confirmPasswordError: "",
+      locationError: ""
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    const signUpData = this.state;
-    //debugger;
-    this.props.dispatch(registerUser(signUpData)).then(() => {
-      console.log("User signed up");
-      const { username, password } = this.state;
-      this.props
-        .dispatch(login(username, password))
-        .then(() => this.props.history.push("/dashboard"));
-      ////debugger;);
-    });
+    const {
+      firstname,
+      lastname,
+      username,
+      password,
+      confirmPassword,
+      location
+    } = this.state;
+    const signUpData = { firstname, lastname, username, password, location };
+    if (firstname.length === 0) {
+      this.resetErrors();
+      return this.setState({ firstnameError: "Please enter your first name" });
+    } else if (lastname.length === 0) {
+      this.resetErrors();
+      return this.setState({ lastnameError: "Please enter your last name" });
+    } else if (username.length === 0) {
+      this.resetErrors();
+      return this.setState({ usernameError: "Please enter a valid username" });
+    } else if (password.length < 8 || password.length > 36) {
+      this.resetErrors();
+      return this.setState({
+        passwordError: "Your password must be between 8 and 36 characters long"
+      });
+    } else if (password !== confirmPassword) {
+      this.resetErrors();
+      return this.setState({
+        confirmPasswordError: `"Password" and "Confirm password" must match`
+      });
+    } else if (location.length === 0) {
+      this.resetErrors();
+      return this.setState({
+        locationError: "Please select your state"
+      });
+    } else {
+      return this.props.dispatch(registerUser(signUpData)).then(() => {
+        console.log("User signed up");
+        const { username, password } = this.state;
+        this.props
+          .dispatch(login(username, password))
+          .then(() => this.props.history.push("/dashboard"));
+      });
+    }
   }
 
   handleChange(event) {
@@ -38,37 +88,37 @@ class Signup extends React.Component {
   }
 
   render() {
-    const testToken = localStorage.getItem("token");
-    console.log(testToken);
     return (
       <React.Fragment>
-        <header className="signup-header">
+        <header className="signup-header" role="banner">
           <h1>Sign Up</h1>
           <p className="signup-subhead">
             Already have an account on Match-Er? Login in{" "}
             <Link to="/login">here</Link>
           </p>
         </header>
-        <main>
-          <section>
+        <main role="main">
+          <section role="region" aria-label="Signup section">
             <form onSubmit={e => this.handleSubmit(e)}>
               <input
                 type="text"
                 id="firstname"
-                placeholder="Firstname"
+                placeholder="First Name"
                 className="signup-input"
                 name="firstname"
                 onChange={e => this.handleChange(e)}
               />
+              <div aria-live="polite">{this.state.firstnameError}</div>
               <br />
               <input
                 type="text"
                 id="lastname"
-                placeholder="Lastname"
+                placeholder="Last Name"
                 className="signup-input"
                 name="lastname"
                 onChange={e => this.handleChange(e)}
               />
+              <div aria-live="polite">{this.state.lastnameError}</div>
               <br />
               <input
                 type="text"
@@ -78,6 +128,7 @@ class Signup extends React.Component {
                 name="username"
                 onChange={e => this.handleChange(e)}
               />
+              <div aria-live="polite">{this.state.usernameError}</div>
               <br />
               <input
                 type="text"
@@ -87,6 +138,7 @@ class Signup extends React.Component {
                 name="password"
                 onChange={e => this.handleChange(e)}
               />
+              <div aria-live="polite">{this.state.passwordError}</div>
               <br />
               <input
                 type="text"
@@ -96,6 +148,7 @@ class Signup extends React.Component {
                 name="confirmPassword"
                 onChange={e => this.handleChange(e)}
               />
+              <div aria-live="polite">{this.state.confirmPasswordError}</div>
               <br />
               <label htmlFor="state">What state do you live in?</label>
               <select
@@ -103,7 +156,7 @@ class Signup extends React.Component {
                 name="location"
                 onChange={e => this.handleChange(e)}
               >
-                <option value="" defaultValue disabled>
+                <option value="" defaultValue>
                   Select a state
                 </option>
                 <option value="AL">Alabama</option>
@@ -158,7 +211,10 @@ class Signup extends React.Component {
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
               </select>
-              <button className="submit-signup">Register</button>
+              <div aria-live="polite">{this.state.locationError}</div>
+              <button type="submit" className="submit-signup">
+                Register
+              </button>
             </form>
           </section>
         </main>

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Friend from "./Friend";
-import WriteMessage from "./WriteMessage";
+import MatchInvite from "./MatchInvite";
 import "./Friends.css";
 
 export default class Friends extends React.Component {
@@ -13,15 +13,17 @@ export default class Friends extends React.Component {
       <li key={index} className="friend-li">
         <Friend {...friend} />
         <br />
-        <WriteMessage _id={friend._id} />
+        <MatchInvite _id={friend._id} username={friend.username} />
       </li>
     ));
     return (
       <React.Fragment>
-        <section className="friends-section">
+        <section className="friends-section" role="region">
           <h3 className="friends-h3">Friends</h3>
           <span className="friends-count"> ({friendsCount})</span>
-          <ul className="friends-list">{friendsArray}</ul>
+          <ul className="friends-list" aria-live="polite">
+            {friendsArray}
+          </ul>
         </section>
       </React.Fragment>
     );

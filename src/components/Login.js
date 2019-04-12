@@ -30,12 +30,12 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <header className="login-header">
+        <header className="login-header" role="header">
           <h1>Login</h1>
           <hr />
         </header>
-        <main>
-          <section>
+        <main role="main">
+          <section role="region">
             <form action="" onSubmit={e => this.handleSubmit(e)}>
               <input
                 type="text"
@@ -71,7 +71,8 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  register: state.register
+  register: state.register,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps)(Login);

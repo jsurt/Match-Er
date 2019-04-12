@@ -40,20 +40,20 @@ export const getUserDataError = () => ({
   type: GET_USER_DATA_ERROR
 });
 
-export const GET_USER_MESSAGES_REQUEST = "GET_USER_MESSAGES_REQUEST";
-export const getUserMessagesRequest = () => ({
-  type: GET_USER_MESSAGES_REQUEST
+export const GET_USER_MATCHES_REQUEST = "GET_USER_MATCHES_REQUEST";
+export const getUserMatchesRequest = () => ({
+  type: GET_USER_MATCHES_REQUEST
 });
 
-export const GET_USER_MESSAGES_SUCCESS = "GET_USER_MESSAGES_SUCCESS";
-export const getUserMessagesSuccess = messages => ({
-  type: GET_USER_MESSAGES_SUCCESS,
-  messages
+export const GET_USER_MATCHES_SUCCESS = "GET_USER_MATCHES_SUCCESS";
+export const getUserMatchesSuccess = matches => ({
+  type: GET_USER_MATCHES_SUCCESS,
+  matches
 });
 
-export const GET_USER_MESSAGES_ERROR = "GET_USER_MESSAGES_ERROR";
-export const getUserMessagesError = () => ({
-  type: GET_USER_MESSAGES_ERROR
+export const GET_USER_MATCHES_ERROR = "GET_USER_MATCHES_ERROR";
+export const getUserMatchesError = () => ({
+  type: GET_USER_MATCHES_ERROR
 });
 
 export const DELETE_FRIEND_REQUEST = "DELETE_FRIEND_REQUEST";
@@ -78,36 +78,42 @@ export const addFriendSuccess = user => ({
   user
 });
 
-export const SEND_MESSAGE_REQUEST = "SEND_MESSAGE_REQUEST";
-export const sendMessageRequest = () => ({
-  type: SEND_MESSAGE_REQUEST
+export const SEND_MATCH_REQUEST = "SEND_MATCH_REQUEST";
+export const sendMatchRequest = () => ({
+  type: SEND_MATCH_REQUEST
 });
 
-export const SEND_MESSAGE_SUCCESS = "SEND_MESSAGE_SUCCESS";
-export const sendMessageSuccess = id => ({
-  type: SEND_MESSAGE_SUCCESS,
+export const SEND_MATCH_SUCCESS = "SEND_MATCH_SUCCESS";
+export const sendMatchInviteSuccess = id => ({
+  type: SEND_MATCH_SUCCESS,
   id
 });
 
-export const SEND_MESSAGE_ERROR = "SEND_MESSAGE_ERROR";
-export const sendMessageError = () => ({
-  type: SEND_MESSAGE_ERROR
+export const SEND_MATCH_ERROR = "SEND_MATCH_ERROR";
+export const sendMatchError = () => ({
+  type: SEND_MATCH_ERROR
 });
 
-export const DELETE_MESSAGE_REQUEST = "DELETE_MESSAGE_REQUEST";
-export const deleteMessageRequest = () => ({
-  type: DELETE_MESSAGE_REQUEST
+export const DELETE_MATCH_REQUEST = "DELETE_MATCH_REQUEST";
+export const deleteMatchRequest = () => ({
+  type: DELETE_MATCH_REQUEST
 });
 
-export const DELETE_MESSAGE_SUCCESS = "DELETE_MESSAGE_SUCCESS";
-export const deleteMessageSuccess = id => ({
-  type: DELETE_MESSAGE_SUCCESS,
+export const DELETE_MATCH_SUCCESS = "DELETE_MATCH_SUCCESS";
+export const deleteMatchSuccess = id => ({
+  type: DELETE_MATCH_SUCCESS,
   id
 });
 
-export const DELETE_MESSAGE_ERROR = "DELETE_MESSAGE_ERROR";
-export const deleteMessageError = () => ({
-  type: DELETE_MESSAGE_ERROR
+export const DELETE_MATCH_ERROR = "DELETE_MATCH_ERROR";
+export const deleteMatchError = () => ({
+  type: DELETE_MATCH_ERROR
+});
+
+export const UPDATE_MATCH_SUCCESS = "UPDATE_MATCH_SUCCESS";
+export const updateMatchSuccess = data => ({
+  type: UPDATE_MATCH_SUCCESS,
+  data
 });
 
 export const getAllUsers = () => dispatch => {
@@ -155,6 +161,7 @@ export const getUserData = () => dispatch => {
     .then(data => {
       console.log(data);
       dispatch(getUserDataSuccess(data));
+      return data;
     })
     .catch(err => {
       //dispatch(getUserDataError());
@@ -202,11 +209,11 @@ export const addFriend = user => dispatch => {
     });
 };
 
-export const getUserMessages = id => dispatch => {
-  console.log("Getting messages");
+export const getUserMatches = id => dispatch => {
+  console.log("Getting matches");
   //dispatch(getUserMessagesRequest());
   const token = localStorage.getItem("token");
-  return fetch(`${API_BASE_URL}/messages`, {
+  return fetch(`${API_BASE_URL}/matches`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -218,8 +225,8 @@ export const getUserMessages = id => dispatch => {
       return res.json();
     })
     .then(data => {
-      dispatch(getUserMessagesSuccess(data));
       console.log(data);
+      dispatch(getUserMatchesSuccess(data));
     })
     .catch(err => {
       //dispatch(getUserMessagesError());
@@ -227,44 +234,82 @@ export const getUserMessages = id => dispatch => {
     });
 };
 
-export const sendMessage = (receiverId, content, sentAt) => dispatch => {
-  const subject = "subject";
-  const msgBody = JSON.stringify({
+export const sendMatchInvite = (receiverId, message, sentAt) => dispatch => {
+  const inviteBody = JSON.stringify({
     receiverId,
-    subject,
-    content,
+    message,
     sentAt
   });
   console.log("Sending message");
   //dispatch(sendMessageRequest);
   const token = localStorage.getItem("token");
-  return fetch(`${API_BASE_URL}/messages`, {
+  return fetch(`${API_BASE_URL}/matches`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`
     },
-    body: msgBody
+    body: inviteBody
   })
     .then(res => {
-      console.log("message sent");
-      dispatch(sendMessageSuccess);
+      console.log("match invite sent");
+      dispatch(sendMatchInviteSuccess);
     })
     .catch(err => {
       console.error("There was an error", err);
     });
 };
 
-export const deleteMessage = id => dispatch => {
-  console.log("Deleting message in actions");
+export const updateMatchInvite = (
+  id,
+  isAccepted,
+  isCompleted,
+  comments,
+  score,
+  datePlayed
+) => dispatch => {
+  const updateMatchBody = {
+    id,
+    isAccepted,
+    isCompleted,
+    comments,
+    score,
+    datePlayed
+  };
+  console.log(updateMatchBody);
+  console.log(id);
   const token = localStorage.getItem("token");
-  return fetch(`${API_BASE_URL}/messages/${id}`, {
+  return fetch(`${API_BASE_URL}/matches/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      isAccepted: isAccepted,
+      isCompleted: isCompleted,
+      comment: comments,
+      score: score,
+      datePlayed: datePlayed
+    })
+  })
+    .then(res => {
+      console.log(isAccepted);
+      dispatch(updateMatchSuccess(updateMatchBody));
+    })
+    .catch(err => console.error("There was an error", err));
+};
+
+export const deleteMatch = id => dispatch => {
+  console.log("Deleting match in actions");
+  const token = localStorage.getItem("token");
+  return fetch(`${API_BASE_URL}/matches/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`
     }
   })
-    .then(dispatch(deleteMessageSuccess(id)))
+    .then(dispatch(deleteMatchSuccess(id)))
     .catch(err => console.error("There was an error", err));
 };

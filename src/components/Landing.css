@@ -1,49 +1,79 @@
+.landing-background, .opaque-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: scroll;
+}
+
+.landing-background {
+    background: url(https://cdn.wallpapersafari.com/67/14/nfygBq.png) center center no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.opaque-background {
+    background: #00000066;
+}
+
 .landing-header {
-    margin-top: 75px;
-    padding: 5px;
+    margin: 0 auto;
+    position: absolute;               
+    top: 50%;   
+    left: 20%; 
+    right: 20%;                     
+    transform: translate(0, -50%);
     text-align: center;
-    font-size: 34px;
+    font-size: 22px;
+    color: #ffffff;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.landing-head {
+    margin-bottom: 0px;
 }
 
 .landing-subhead {
-    font-size: 28px;
+    margin-top: 0px;
+    padding-left: 3px;
+    padding-bottom: 3px;
+    font-size: 12px;
+    font-family: 'Josefin Slab', serif;
+    border-bottom: 1px solid #ffffff;
+}
+
+.landing-btn {
+    font-size: 9px;
+    width: 75px;
+    padding: 7px 5px 8px 6px;
+    border: none;
+    color: #292929;
+    background: #ffffffec;
+    -webkit-transition: transform 1s; 
+    transition: transform 1s;
+}
+
+.landing-signup:hover {
+    transform: rotateX(360deg);
+    cursor: pointer;
+}
+
+.landing-login:hover {
+    transform: rotateY(360deg);
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
-    color: #333333;
+    color: #000000;
 }
 
 main {
-    margin-top: 1%;
+    color: #ffffff;
 }
 
 section {
-    padding: 20px;
+    height: 75px;
     text-align: center;
-}
-
-.find, .play {
-    background: #969696;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
-
-.to-register-page {
-    width: 100%;
-    text-align: center;
-}
-
-.to-register-page {
-    margin-top: 10%;
-}
-
-.to-register-text {
-    position: relative;
-    bottom: 70px;
-    left: 69px;
-}
-
-img {
-    width: 75px;
 }

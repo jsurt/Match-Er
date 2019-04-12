@@ -6,15 +6,12 @@ import "./ProfileCard.css";
 
 class ProfileCard extends React.Component {
   render() {
-    console.log(this.props.fullName);
+    const fullName = `${this.props.firstname} ${this.props.lastname}`;
     return (
       <React.Fragment>
-        <section className="user-panel">
-          <img src={this.props.avatarSrc} alt="User's avatar" />
+        <section className="user-panel" role="region">
           <div className="user-info-div">
-            <p className="user-info this-user-whole-name">
-              {this.props.fullName}
-            </p>
+            <p className="user-info this-user-whole-name">{fullName}</p>
             <p className="user-info this-username">{this.props.username}</p>
             <p className="user-info this-user-state">{this.props.location}</p>
           </div>

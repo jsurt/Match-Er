@@ -1,20 +1,20 @@
 import React from "react";
-import { deleteFriend, sendMessage } from "../actions/index";
+import { deleteFriend, sendMatchInvite } from "../actions/index";
 import { dispatch } from "rxjs/internal/observable/range";
 import { connect } from "react-redux";
 //import sendMessage from "../actions/sendMessage";
 
-class WriteMessage extends React.Component {
+class MatchInvite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       editing: false,
       message: "",
-      id: this.props._id
+      messageError: ""
     };
   }
 
-  handleInitiateMessage(event) {
+  handleInitiateMatchInvite(event) {
     this.setState({
       editing: true
     });
@@ -26,20 +26,25 @@ class WriteMessage extends React.Component {
     });
   }
 
-  handleSendMessage(event) {
-    const receiverId = this.state.id;
-    const content = this.state.message;
+  handleSendMatchInvite(event) {
+    event.preventDefault();
+    const receiverId = this.props._id;
+    const message = this.state.message;
     const date = new Date();
-    const dateNeat = date.toLocaleDateString("en-US");
-    this.props.dispatch(sendMessage(receiverId, content, dateNeat));
-    this.setState({
-      editing: false
-    });
+    const sentAt = date.toLocaleDateString("en-US");
+    if (message.length === 0) {
+      return this.setState({ messageError: "Your message cannot be blank" });
+    } else {
+      this.setState({ editing: false });
+      return this.props.dispatch(sendMatchInvite(receiverId, message, sentAt));
+    }
   }
 
-  handleCancelMessage(event) {
+  handleCancelMatchInvite(event) {
     this.setState({
-      editing: false
+      editing: false,
+      message: "",
+      messageError: ""
     });
   }
 
@@ -56,7 +61,7 @@ class WriteMessage extends React.Component {
         <div>
           <button
             className="friend-btns send-msg"
-            onClick={e => this.handleInitiateMessage(e)}
+            onClick={e => this.handleInitiateMatchInvite(e)}
           >
             <img
               className="friend-btn-icon msg-icon"
@@ -79,14 +84,23 @@ class WriteMessage extends React.Component {
     } else {
       return (
         <div>
-          <textarea onChange={e => this.handleChange(e)} />
-          <br />
-          <button onClick={e => this.handleSendMessage(e)}>Send</button>
-          <button onClick={e => this.handleCancelMessage(e)}>Cancel</button>
+          <form onSubmit={e => this.handleSendMatchInvite(e)}>
+            <textarea
+              placeholder={`Invite '${this.props.username}' to play a match`}
+              value={this.state.message}
+              onChange={e => this.handleChange(e)}
+            />
+            <div>{this.state.messageError}</div>
+            <br />
+            <button type="submit">Send</button>
+            <button onClick={e => this.handleCancelMatchInvite(e)}>
+              Cancel
+            </button>
+          </form>
         </div>
       );
     }
   }
 }
 
-export default connect()(WriteMessage);
+export default connect()(MatchInvite);
