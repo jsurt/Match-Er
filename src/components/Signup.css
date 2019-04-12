@@ -1,8 +1,16 @@
 .signup-header {
     margin-top: 20px;
-    text-align: center;
+    width: 300px;
+    margin: auto;
+    margin-top: 15px;
+    text-align: left;
     color: #ffffff;
+    font-size: 36px;
     font-family: 'Open Sans Condensed', sans-serif;
+}  
+
+.signup-header > h1 {
+    margin-bottom: 10px;
 }
 
 .signup-subhead {
@@ -20,10 +28,19 @@
 .login-link, .landing-link {
     color: #ffffff;
     border-bottom: 1px solid #ffffff;
+    transition: border-bottom 0.9s;
 }
 
 .landing-link {
     font-size: 14px;
+}
+
+.landing-link:hover {
+    border-bottom: 2px solid #f2ff00;
+}
+
+.login-link:hover {
+    border-bottom: 2px solid #007b22;
 }
 
 main {
@@ -46,9 +63,10 @@ form {
 }
 
 .state-select {
+    display: inline-block;
     width: 300px;
     background: #ffffff;
-    padding: 4px;
+    padding: 6px;
     border: none;
     border-radius: 1px;
 }
@@ -60,7 +78,12 @@ form {
 }
 
 .next-text-fld-btn:hover {
+    opacity: 0.9;
     cursor: pointer;
+}
+
+.next-text-fld-btn:focus{
+    outline: none;
 }
 
 .errorMsg {
@@ -70,4 +93,31 @@ form {
     font-size: 12px;
     color: red;
     font-family: 'Josefin Slab', serif;
+}
+
+@media (min-width: 600px) {
+    .signup-header, .signup-subhead, .errorMsg {
+        width: 450px;
+    }
+    .signup-subhead {
+        margin: auto;
+        font-size: 20px;
+        text-align: left;
+    }
+    .signup-input, .state-select {
+        width: 450px;
+        font-size: 16px;
+    }
+    .signup-input {
+        padding: 10px;
+    }
+    .state-select {
+        padding: 9px;
+    }
+    .landing-link {
+        font-size: 24px;
+    }
+    .errorMsg {
+        font-size: 18px;
+    }
 }

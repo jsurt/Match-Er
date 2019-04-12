@@ -5,7 +5,11 @@
     margin-top: 15%;
     margin-right: 0% !important;
     margin-left: 0% !important;
-    font-size: 44px;
+    font-size: 52px;
+}
+
+.landing-head {
+    font-size: 102px;
 }
 
 .landing-head, .landing-subhead {
@@ -18,8 +22,4 @@
 
 .landing-login {
     margin-right: 188px;
-}
-
-.signup-header, .signup-subhead {
-    text-align: left;
 }
