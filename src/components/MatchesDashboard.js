@@ -20,10 +20,16 @@ class MatchesDashboard extends React.Component {
   render() {
     const matchData = this.props.match ? this.props.match : [];
     return (
-      <main role="main">
-        <h1>Matches</h1>
-        <Matches userId={this.props.user.id} matches={matchData.matches} />
-      </main>
+      <div className="background-2">
+        <div className="opaque-background-2">
+          <header className="matches-header">
+            <h1 className="matches-h1">Matches</h1>
+          </header>
+          <main role="main" className="matches-main">
+            <Matches userId={this.props.user.id} matches={matchData.matches} />
+          </main>
+        </div>
+      </div>
     );
   }
 }

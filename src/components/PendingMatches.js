@@ -4,6 +4,7 @@ import ReceivedMatch from "./ReceivedMatch";
 import SentMatch from "./SentMatch";
 import EditReceivedMatchInvite from "./EditReceivedMatchInvite";
 import EditSentMatchInvite from "./EditSentMatchInvite";
+import "./Matches.css";
 
 export default class PendingMatches extends React.Component {
   render() {
@@ -15,14 +16,14 @@ export default class PendingMatches extends React.Component {
       console.log(match.receiverId._id);
       if (userId === match.receiverId._id) {
         return (
-          <li key={index} className="message-li">
+          <li key={index} className="match-li">
             <ReceivedMatch {...match} />
             <EditReceivedMatchInvite {...match} />
           </li>
         );
       } else {
         return (
-          <li key={index} className="message-li">
+          <li key={index} className="match-li">
             <SentMatch {...match} />
             <EditSentMatchInvite {...match} />
           </li>
@@ -31,8 +32,7 @@ export default class PendingMatches extends React.Component {
     });
     return (
       <section className="inbox-section" role="region">
-        <span className="messages-count"> ({matchCount})</span>
-        <ul className="messages-list" aria-live="polite">
+        <ul className="matches-list" aria-live="polite">
           {matchesArray}
         </ul>
       </section>

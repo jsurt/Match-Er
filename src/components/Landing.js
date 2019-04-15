@@ -6,8 +6,8 @@ export default class Landing extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="landing-background">
-          <div className="opaque-background">
+        <div className="landing-background-1">
+          <div className="opaque-background-1">
             <header className="landing-header" role="banner">
               <h1 className="landing-head">Match-Er</h1>
               <p className="landing-subhead">

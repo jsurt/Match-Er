@@ -11,7 +11,7 @@ export default function Friend(props) {
       }`}</span>
       <span className="friend-info-divider"> | </span>
       <span className="friend-info friend-username">{props.username}</span>
-      <span className="friend-info friend-state">{props.state}</span>
+      <span className="friend-info friend-state">{props.location}</span>
     </React.Fragment>
   );
 }

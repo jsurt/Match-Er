@@ -5,7 +5,14 @@ import AddFriend from "./AddFriend";
 import "./UserList.css";
 
 export default class UserList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      limitTo: 10
+    };
+  }
   render() {
+    console.log(this.props);
     const { filter, userState } = this.props;
     console.log(filter, userState);
     const users = this.props.users.users ? this.props.users.users : [];
@@ -33,7 +40,7 @@ export default class UserList extends React.Component {
         <li key={index} className="community-li">
           <User {...user} />
           <br />
-          <AddFriend _user={user} />
+          <AddFriend userId={this.props.userId} _user={user} />
         </li>
       ));
       return (

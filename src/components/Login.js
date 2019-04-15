@@ -45,8 +45,8 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="landing-background">
-          <div className="opaque-background">
+        <div className="landing-background-1">
+          <div className="opaque-background-1">
             <header className="login-header" role="header">
               <h1>Login</h1>
               <p className="login-subhead">

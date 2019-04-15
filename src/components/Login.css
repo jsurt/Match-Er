@@ -1,6 +1,6 @@
 .login-header {
     margin-top: 20px;
-    width: 300px;
+    width: 275px;
     margin: auto;
     margin-top: 15px;
     text-align: left;
@@ -14,7 +14,7 @@
 }
 
 .login-subhead {
-    width: 300px;
+    width: 275px;
     margin: auto;
     font-size: 14px;
     text-align: left;
@@ -41,7 +41,8 @@ form {
 }
 
 .login-input {
-    width: 300px;
+    width: 275px;
+    height: 35px;
     margin: auto;
     margin-bottom: 15px;
     padding: 5px;

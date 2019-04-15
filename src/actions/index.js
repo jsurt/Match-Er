@@ -118,7 +118,7 @@ export const updateMatchSuccess = data => ({
 
 export const getAllUsers = () => dispatch => {
   const token = localStorage.getItem("token");
-  return fetch(`${API_BASE_URL}/users`, {
+  return fetch(`${API_BASE_URL}/community`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -272,7 +272,9 @@ export const updateMatchInvite = (
     id,
     isAccepted,
     isCompleted,
-    comments,
+    comments: {
+      content: comments
+    },
     score,
     datePlayed
   };

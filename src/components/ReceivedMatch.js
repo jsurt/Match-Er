@@ -1,4 +1,5 @@
 import React from "react";
+import "./EditMatch.css";
 
 export default class ReceivedMatch extends React.Component {
   render() {
@@ -35,9 +36,9 @@ export default class ReceivedMatch extends React.Component {
       console.log(score.score);
       const giveOutcome = (username, score) => {
         if (score.isWon) {
-          return `You defeated ${username} ${score.score}`;
+          return `You lost to ${username} ${score.score}`;
         } else {
-          return `${username} defeated you ${score.score}`;
+          return `You won against ${username} ${score.score}`;
         }
       };
       return (

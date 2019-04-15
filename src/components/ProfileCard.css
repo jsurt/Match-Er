@@ -1,9 +1,11 @@
 .user-panel {
-    max-width: 640px;
+    max-width: 600px;
     margin: auto;
-    margin-top: 55px;
+    margin-top: 63px;
     padding: 10px;
     text-align: center;
-    background: #989898;
-    border-radius: 0px;
+    border-radius: 3px;
+    background: #000000b3;
+    font-size: 17px;
+    font-family: 'Josefin Slab', serif;
 }

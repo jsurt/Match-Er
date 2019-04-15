@@ -67,6 +67,7 @@ export const matchReducer = (state = initialState, action) => {
       };
       console.log(dataObj.score);
       const updateMatch = newData => {
+        console.log(newData.comments);
         return state.matches.map(match => {
           if (match.id !== id) {
             return match;
@@ -75,14 +76,22 @@ export const matchReducer = (state = initialState, action) => {
               ...match,
               ...newData
             };
-          } else if (match.id === id && newData.comments.length > 0) {
-            //newData.comments = match.comments.concat(newData.comments))
+          } else if (match.id === id && newData.comments.content.length > 0) {
+            console.log(match.comments);
+            // console.log(
+            //   (newData.comments = match.comments.concat(newData.comments))
+            // );
             newData.comments = match.comments.concat(newData.comments);
             return {
               ...match,
               ...newData
             };
           } else {
+            alert("uh oh");
+            console.log(newData.comments.content);
+            console.log(newData.comments);
+            console.log(newData.comments.content.length);
+            newData.comments = [];
             return {
               ...match,
               ...newData

@@ -40,6 +40,9 @@ export default class Matches extends React.Component {
   }
 
   render() {
+    const matchCategoryStyle = {
+      borderBottomColor: "#ffffff"
+    };
     console.log(this.props);
     const matches = this.props.matches ? this.props.matches : [];
     const userId = this.props.userId;
@@ -76,10 +79,41 @@ export default class Matches extends React.Component {
     }
     return (
       <React.Fragment>
-        <div>
-          <button onClick={() => this.showPending()}>Pending</button>
-          <button onClick={() => this.showAccepted()}>Accepted</button>
-          <button onClick={() => this.showComplete()}>Complete</button>
+        <div className="matches-btns-wrap">
+          <button
+            className="matches-btn pending-matches-btn"
+            onClick={() => this.showPending()}
+          >
+            <img
+              style={this.state.showPending ? matchCategoryStyle : undefined}
+              className="matches-btn-icon pending-icon"
+              src="https://image.flaticon.com/icons/svg/968/968550.svg"
+              alt="Pending matches icon"
+            />
+          </button>
+          <button
+            className="matches-btn accepted-matches-btn"
+            onClick={() => this.showAccepted()}
+          >
+            <img
+              style={this.state.showAccepted ? matchCategoryStyle : undefined}
+              className="matches-btn-icon accepted-icon"
+              src="https://image.flaticon.com/icons/svg/1669/1669332.svg"
+              alt="Pending matches icon"
+            />
+          </button>
+          <button
+            className="matches-btn completed-matches-btn"
+            onClick={() => this.showComplete()}
+          >
+            {" "}
+            <img
+              style={this.state.showComplete ? matchCategoryStyle : undefined}
+              className="matches-btn-icon completed-icon"
+              src="https://image.flaticon.com/icons/svg/969/969603.svg"
+              alt="Write message icon"
+            />
+          </button>
         </div>
         <section>{visibleComponent}</section>
       </React.Fragment>

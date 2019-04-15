@@ -27,42 +27,53 @@ class Community extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <header className="community-header">
-          <h1 className="community-h1">Community</h1>
-          <p className="community-subhead">Sort by state or entire country</p>
-        </header>
-        <main>
-          <div className="user-filter-wrap">
-            <span className="radio-btn-wrap state">
-              <label htmlFor="state" className="radio-btn-label">
-                State
-              </label>
-              <input
-                onClick={e => this.handleChangeFilter(e)}
-                type="radio"
-                name="button"
-                value="state"
-                id="state"
-                defaultChecked
+        <div className="background-3">
+          <div className="opaque-background-3">
+            <header className="community-header">
+              <h1 className="community-h1">Community</h1>
+              <p className="community-subhead">
+                Sort by state or entire country
+              </p>
+            </header>
+            <main role="main" className="community-main">
+              <div className="user-filter-wrap">
+                <span className="radio-btn-wrap state">
+                  <label htmlFor="state" className="radio-btn-label">
+                    State
+                    <input
+                      onClick={e => this.handleChangeFilter(e)}
+                      type="radio"
+                      name="button"
+                      value="state"
+                      id="state"
+                      defaultChecked
+                    />
+                    <div className="check" />
+                  </label>
+                </span>
+                <span className="radio-btn-wrap country">
+                  <label htmlFor="country" className="radio-btn-label">
+                    Country
+                    <input
+                      onClick={e => this.handleChangeFilter(e)}
+                      type="radio"
+                      name="button"
+                      value="country"
+                      id="country"
+                    />
+                    <div className="check" />
+                  </label>
+                </span>
+              </div>
+              <UserList
+                userId={this.props.user.id}
+                filter={this.props.community.filter}
+                users={this.props.community.users}
+                userState={this.props.user.location}
               />
-            </span>
-            <span className="radio-btn-wrap country">
-              <label htmlFor="country">Country</label>
-              <input
-                onClick={e => this.handleChangeFilter(e)}
-                type="radio"
-                name="button"
-                value="country"
-                id="country"
-              />
-            </span>
+            </main>
           </div>
-          <UserList
-            filter={this.props.community.filter}
-            users={this.props.community.users}
-            userState={this.props.user.location}
-          />
-        </main>
+        </div>
       </React.Fragment>
     );
   }

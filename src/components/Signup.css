@@ -1,6 +1,6 @@
 .signup-header {
     margin-top: 20px;
-    width: 300px;
+    width: 275px;
     margin: auto;
     margin-top: 15px;
     text-align: left;
@@ -14,7 +14,7 @@
 }
 
 .signup-subhead {
-    width: 300px;
+    width: 275px;
     margin: auto;
     font-size: 14px;
     text-align: left;
@@ -54,7 +54,8 @@ form {
 }
 
 .signup-input {
-    width: 300px;
+    width: 275px;
+    height: 35px;
     margin-bottom: 15px;
     padding: 5px;
     border: none;
@@ -64,11 +65,12 @@ form {
 
 .state-select {
     display: inline-block;
-    width: 300px;
+    width: 275px;
+    height: 35px;
     background: #ffffff;
     padding: 6px;
     border: none;
-    border-radius: 1px;
+    border-radius: 0px;
 }
 
 .next-text-fld-btn {

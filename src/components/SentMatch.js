@@ -1,4 +1,5 @@
 import React from "react";
+import "./EditMatch.css";
 
 export default class SentMatch extends React.Component {
   render() {
@@ -26,16 +27,16 @@ export default class SentMatch extends React.Component {
         <React.Fragment>
           <p>
             {username} has accepted your invite. Comment to arrange a time and
-            place.
+            place. Note the score if you've played.
           </p>
         </React.Fragment>
       );
     } else if (isCompleted) {
       const giveOutcome = (username, score) => {
         if (score.isWon) {
-          return `You defeated ${username} ${score.score}`;
+          return `You lost to ${username} ${score.score}`;
         } else {
-          return `${username} defeated you ${score.score}`;
+          return `You won against ${username} ${score.score}`;
         }
       };
       return (

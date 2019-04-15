@@ -19,8 +19,11 @@ export default class Friends extends React.Component {
     return (
       <React.Fragment>
         <section className="friends-section" role="region">
-          <h3 className="friends-h3">Friends</h3>
-          <span className="friends-count"> ({friendsCount})</span>
+          <div className="friends-h3-wrap">
+            <h3 className="friends-h3">Friends</h3>
+            <span> </span>
+            <span className="friends-count"> ({friendsCount})</span>
+          </div>
           <ul className="friends-list" aria-live="polite">
             {friendsArray}
           </ul>

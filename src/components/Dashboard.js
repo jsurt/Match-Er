@@ -14,10 +14,17 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.dispatch(userLoginSuccess());
     console.log("Getting user data");
-    this.props.dispatch(getUserData());
+    this.props.dispatch(getUserData()).then(() => {
+      const id = this.props.user.id;
+      console.log(id);
+      this.props
+        .dispatch(getUserMatches(id))
+        .then(() => console.log("Matches fetched"));
+    });
   }
 
   render() {
+    const matchData = this.props.match ? this.props.match : [];
     console.log("Dashboard has rendered", this.props.match);
     const userData = this.props.user
       ? this.props.user
@@ -30,15 +37,21 @@ class Dashboard extends React.Component {
         };
     return (
       <React.Fragment>
-        <main className="dashboard-main" role="main">
-          <ProfileCard
-            firstname={userData.firstname}
-            lastname={userData.lastname}
-            username={userData.username}
-            location={userData.location}
-          />
-          <Friends friends={userData.friends} />
-        </main>
+        <div className="background-2">
+          <div className="opaque-background-2">
+            <main className="dashboard-main" role="main">
+              <ProfileCard
+                userId={userData.id}
+                firstname={userData.firstname}
+                lastname={userData.lastname}
+                username={userData.username}
+                location={userData.location}
+                matches={matchData.matches}
+              />
+              <Friends friends={userData.friends} />
+            </main>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
@@ -47,6 +60,7 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
   console.log("mapStateToProps ran", state);
   return {
+    match: state.match,
     user: state.user.user
   };
 };

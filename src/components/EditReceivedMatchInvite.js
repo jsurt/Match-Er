@@ -4,6 +4,7 @@ import { updateMatchInvite, deleteMatch } from "../actions/index";
 import { dispatch } from "rxjs/internal/observable/range";
 import { connect } from "react-redux";
 import Comment from "./Comment";
+import "./EditMatch.css";
 
 class EditReceivedMatchInvite extends React.Component {
   constructor(props) {
@@ -13,11 +14,13 @@ class EditReceivedMatchInvite extends React.Component {
       scoring: false,
       isWon: true,
       score: "",
+      commentSender: this.props.receiverId.username,
       newComment: "",
       datePlayed: "",
       commentError: "",
       scoreError: "",
-      datePlayedError: ""
+      datePlayedError: "",
+      confirmDelete: false
     };
   }
 
@@ -28,7 +31,15 @@ class EditReceivedMatchInvite extends React.Component {
     console.log(this.state.newComment, this.state.score);
   }
 
-  handleDeleteMatch(event) {
+  handleDeleteMatch(e) {
+    this.setState({ confirmDelete: true });
+  }
+
+  handleCancelDelete() {
+    this.setState({ confirmDelete: false });
+  }
+
+  deleteMatch(event) {
     const { id } = this.props;
     console.log(`Deleting message with id ${id}`);
     this.props.dispatch(deleteMatch(id));
@@ -72,11 +83,13 @@ class EditReceivedMatchInvite extends React.Component {
     const { id } = this.props;
     const isAccepted = true;
     const isCompleted = false;
-    const comments = this.state.newComment;
+    const comments = `${this.state.commentSender} said: "${
+      this.state.newComment
+    }"`;
     let score = null;
     const datePlayed = null;
     console.log(id, isAccepted, isCompleted, comments, score, datePlayed);
-    if (comments.length === 0) {
+    if (this.state.newComment.trim().length === 0) {
       return this.setState({ commentError: "Comment cannot be blank" });
     } else {
       this.setState({ newComment: "", commentError: "" });
@@ -159,13 +172,13 @@ class EditReceivedMatchInvite extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.props.comments.content);
     const { isAccepted, isCompleted } = this.props;
     const { editing, scoring } = this.state;
     const comments = this.props.comments ? this.props.comments : [];
     const commentsArray = comments.map((comment, index) => {
       return (
-        <li key={index}>
+        <li className="comment-li" key={index}>
           <Comment {...comment} />
         </li>
       );
@@ -173,8 +186,48 @@ class EditReceivedMatchInvite extends React.Component {
     if (!isAccepted) {
       return (
         <React.Fragment>
-          <button onClick={e => this.handleAcceptMatch(e)}>Accept</button>
-          <button onClick={e => this.handleDeleteMatch(e)}>Decline</button>
+          <button
+            className="match-btn accept-match"
+            onClick={e => this.handleAcceptMatch(e)}
+            hidden={this.state.confirmDelete}
+          >
+            <img
+              className="edit-match-btn-icon accept-match"
+              src="https://image.flaticon.com/icons/svg/747/747580.svg"
+              alt="Accept match"
+            />
+          </button>
+          <button
+            className="match-btn delete-match"
+            onClick={e => this.handleDeleteMatch(e)}
+            hidden={this.state.confirmDelete}
+          >
+            {" "}
+            <img
+              className="edit-match-btn-icon delete-icon"
+              src="https://image.flaticon.com/icons/svg/458/458594.svg"
+              alt="Delete invite icon"
+            />
+          </button>
+          <div
+            className="confirm-delete-msg"
+            hidden={!this.state.confirmDelete}
+          >
+            Are you sure you want to delete this invite?
+            <br />
+            <button
+              onClick={e => this.deleteMatch(e)}
+              className="confirm-delete"
+            >
+              Yes, Delete
+            </button>
+            <button
+              onClick={e => this.handleCancelDelete(e)}
+              className="cancel-delete"
+            >
+              Cancel
+            </button>
+          </div>
         </React.Fragment>
       );
     } else if (isAccepted && !isCompleted) {
@@ -182,63 +235,144 @@ class EditReceivedMatchInvite extends React.Component {
         return (
           <React.Fragment>
             <button
+              className="match-btn write-comment-btn"
               type="submit"
               id="msg-reply"
               onClick={e => this.handleMakeComment(e)}
+              hidden={this.state.confirmDelete}
             >
-              Chat
+              <img
+                className="edit-match-btn-icon write-comment-icon"
+                src="https://www.flaticon.com/premium-icon/icons/svg/1069/1069210.svg"
+                alt="Comment button"
+              />
             </button>
+
             <button
-              type="submit"
-              id="msg-reply"
-              onClick={e => this.handleWriteScore(e)}
-            >
-              Score
-            </button>
-            <button
+              className="match-btn delete-match"
               type="submit"
               id="msg-delete"
               onClick={e => this.handleDeleteMatch(e)}
+              hidden={this.state.confirmDelete}
             >
-              Delete
+              <img
+                className="edit-match-btn-icon delete-icon"
+                src="https://image.flaticon.com/icons/svg/458/458594.svg"
+                alt="Delete invite icon"
+              />
             </button>
+            <div
+              className="confirm-delete-msg"
+              hidden={!this.state.confirmDelete}
+            >
+              Are you sure you want to delete this invite?
+              <br />
+              <button
+                onClick={e => this.deleteMatch(e)}
+                className="confirm-delete"
+              >
+                Yes, Delete
+              </button>
+              <button
+                onClick={e => this.handleCancelDelete(e)}
+                className="cancel-delete"
+              >
+                Cancel
+              </button>
+            </div>
           </React.Fragment>
         );
       } else if (editing && !scoring) {
         return (
           <div>
-            <ul aria-live="polite">{commentsArray}</ul>
+            <ul className="comment-ul" aria-live="polite">
+              {commentsArray}
+            </ul>
             <form onSubmit={e => this.handleSendComment(e)}>
               <textarea
+                placeholder="Write your comment here"
                 name="newComment"
                 value={this.state.newComment}
                 onChange={e => this.handleChange(e)}
               />
-              <div aria-live="polite">{this.state.commentError}</div>
+              <div className="comment-error" aria-live="polite">
+                {this.state.commentError}
+              </div>
               <br />
-              <button type="submit">Send</button>
-              <button onClick={e => this.handleCancelComment(e)}>Cancel</button>
+              <button className="submit-comment-btn" type="submit">
+                {" "}
+                <img
+                  className="submit-comment-icon"
+                  src="https://image.flaticon.com/icons/svg/1621/1621913.svg"
+                  alt="Send message icon"
+                />
+              </button>
+              <button
+                className="cancel-comment-btn"
+                onClick={e => this.handleCancelComment(e)}
+              >
+                {" "}
+                <img
+                  className="edit-match-btn-icon cancel-comment-icon"
+                  src="https://image.flaticon.com/icons/svg/458/458594.svg"
+                  alt="Delete friend icon"
+                />
+              </button>
             </form>
           </div>
         );
-      } else if (!editing && scoring) {
-        return (
-          <div>
-            <form onSubmit={e => this.handleSubmitScore(e)}>
-              <label htmlFor="score">Score:</label>
-              <input
-                name="score"
-                id="score"
-                onChange={e => this.handleChange(e)}
-              />
-              <br />
-              <label htmlFor="datePlayed">Date:</label>
-              <input
-                name="datePlayed"
-                id="datePlayed"
-                onChange={e => this.handleChange(e)}
-              />
-              <div className="won-lost-btn-wrap">
+      }
+    } else if (isCompleted) {
+      return (
+        <div>
+          <button
+            className="match-btn delete-match"
+            onClick={e => this.handleDeleteMatch(e)}
+            hidden={this.state.confirmDelete}
+          >
+            {" "}
+            <img
+              className="edit-match-btn-icon delete-icon"
+              src="https://image.flaticon.com/icons/svg/458/458594.svg"
+              alt="Delete invite icon"
+            />
+          </button>
+          <div
+            className="confirm-delete-msg"
+            hidden={!this.state.confirmDelete}
+          >
+            Are you sure you want to delete this invite?
+            <br />
+            <button
+              onClick={e => this.deleteMatch(e)}
+              className="confirm-delete"
+            >
+              Yes, Delete
+            </button>
+            <button
+              onClick={e => this.handleCancelDelete(e)}
+              className="cancel-delete"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      );
+    }
+  }
+}
+
+export default connect()(EditReceivedMatchInvite);
+
+{
+  /* 
+              <button
+              type="submit"
+              id="msg-reply"
+              onClick={e => this.handleWriteScore(e)}
+            >
+              Score
+            </button><div className="won-lost-btn-wrap">
                 <span className="won-wrap">
                   <label htmlFor="won" className="radio-btn-label">
                     Won
@@ -262,7 +396,25 @@ class EditReceivedMatchInvite extends React.Component {
                     id="lost"
                   />
                 </span>
-              </div>
+              </div> 
+            else if (!editing && scoring) {
+        return (
+          <div>
+            <form onSubmit={e => this.handleSubmitScore(e)}>
+              <label htmlFor="score">Score:</label>
+              <input
+                name="score"
+                id="score"
+                onChange={e => this.handleChange(e)}
+              />
+              <br />
+              <label htmlFor="datePlayed">Date:</label>
+              <input
+                name="datePlayed"
+                id="datePlayed"
+                onChange={e => this.handleChange(e)}
+              />
+              
               <div aria-live="polite">{this.state.scoreError}</div>
               <div aria-live="polite">{this.state.datePlayedError}</div>
               <button type="submit">Submit</button>
@@ -270,15 +422,5 @@ class EditReceivedMatchInvite extends React.Component {
             </form>
           </div>
         );
-      }
-    } else if (isCompleted) {
-      return (
-        <div>
-          <button onClick={e => this.handleDeleteMatch(e)}>Delete</button>
-        </div>
-      );
-    }
-  }
+      }*/
 }
-
-export default connect()(EditReceivedMatchInvite);

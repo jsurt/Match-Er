@@ -2,6 +2,7 @@ import React from "react";
 import { addFriend } from "../actions/index";
 import { dispatch } from "rxjs/internal/observable/range";
 import { connect } from "react-redux";
+import "./Community.css";
 
 class AddFriend extends React.Component {
   handleAddFriend(event) {
@@ -10,11 +11,19 @@ class AddFriend extends React.Component {
     this.props.dispatch(addFriend(user));
   }
   render() {
-    console.log(this.props._user);
+    console.log(this.props.userId);
     return (
       <React.Fragment>
-        <button onClick={e => this.handleAddFriend(e)} className="add-friend">
-          Add as Friend
+        <button
+          className="add-friend-btn"
+          onClick={e => this.handleAddFriend(e)}
+          className="add-friend-btn"
+        >
+          <img
+            className="add-friend-icon"
+            src="https://image.flaticon.com/icons/svg/747/747968.svg"
+            alt="Add as a friend"
+          />
         </button>
       </React.Fragment>
     );

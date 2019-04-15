@@ -154,8 +154,8 @@ class Signup extends React.Component {
     // };
     return (
       <React.Fragment>
-        <div className="landing-background">
-          <div className="opaque-background">
+        <div className="landing-background-1">
+          <div className="opaque-background-1">
             <header className="signup-header" role="banner">
               <h1>Sign Up</h1>
               <p className="signup-subhead">

@@ -1,3 +1,18 @@
-.dashboard-main {
-    background: #e8e8e8;
+.background-2, .opaque-background-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* overflow-y: scroll; */
+}
+
+.background-2 {
+    background: url(https://cdn.wallpapersafari.com/13/82/DyX10J.jpg) center center no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.opaque-background-2 {
+    background: #000000a5;
 }

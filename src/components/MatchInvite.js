@@ -2,6 +2,7 @@ import React from "react";
 import { deleteFriend, sendMatchInvite } from "../actions/index";
 import { dispatch } from "rxjs/internal/observable/range";
 import { connect } from "react-redux";
+import "./MatchInvite.css";
 //import sendMessage from "../actions/sendMessage";
 
 class MatchInvite extends React.Component {
@@ -10,7 +11,8 @@ class MatchInvite extends React.Component {
     this.state = {
       editing: false,
       message: "",
-      messageError: ""
+      messageError: "",
+      confirmDelete: false
     };
   }
 
@@ -48,7 +50,15 @@ class MatchInvite extends React.Component {
     });
   }
 
-  handleDeleteFriend(event) {
+  handleDeleteFriend(e) {
+    this.setState({ confirmDelete: true });
+  }
+
+  handleCancelDelete() {
+    this.setState({ confirmDelete: false });
+  }
+
+  deleteFriend(event) {
     const id = this.props._id;
     console.log(id);
     this.props.dispatch(deleteFriend(id));
@@ -58,46 +68,82 @@ class MatchInvite extends React.Component {
     console.log(this.props._id, this.state.id);
     if (!this.state.editing) {
       return (
-        <div>
+        <div className="friends-btn-wrap">
           <button
             className="friend-btns send-msg"
             onClick={e => this.handleInitiateMatchInvite(e)}
+            hidden={this.state.confirmDelete}
           >
             <img
               className="friend-btn-icon msg-icon"
-              src="https://www.flaticon.com/premium-icon/icons/svg/896/896849.svg"
-              alt="Send message icon"
+              src="https://image.flaticon.com/icons/svg/1388/1388941.svg"
+              alt="Write message icon"
             />
           </button>
           <button
             className="friend-btns delete-friend"
             onClick={e => this.handleDeleteFriend(e)}
+            hidden={this.state.confirmDelete}
           >
             <img
               className="friend-btn-icon delete-icon"
-              src="https://www.flaticon.com/premium-icon/icons/svg/484/484662.svg"
+              src="https://image.flaticon.com/icons/svg/458/458594.svg"
               alt="Delete friend icon"
             />
           </button>
+          <div
+            className="confirm-delete-msg"
+            hidden={!this.state.confirmDelete}
+          >
+            Are you sure you want to delete this Friend?
+            <br />
+            <button
+              onClick={e => this.deleteFriend(e)}
+              className="confirm-delete"
+            >
+              Yes, Delete
+            </button>
+            <button
+              onClick={e => this.handleCancelDelete(e)}
+              className="cancel-delete"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       );
     } else {
       return (
-        <div>
-          <form onSubmit={e => this.handleSendMatchInvite(e)}>
-            <textarea
-              placeholder={`Invite '${this.props.username}' to play a match`}
-              value={this.state.message}
-              onChange={e => this.handleChange(e)}
+        <form
+          className="send-match-invite-form"
+          onSubmit={e => this.handleSendMatchInvite(e)}
+        >
+          <textarea
+            className="match-invite-textarea"
+            placeholder={`Invite '${this.props.username}' to play a match`}
+            value={this.state.message}
+            onChange={e => this.handleChange(e)}
+          />
+          <div>{this.state.messageError}</div>
+          <br />
+          <button className="submit-match-invite" type="submit">
+            <img
+              className="submit-match-invite-icon"
+              src="https://image.flaticon.com/icons/svg/1621/1621913.svg"
+              alt="Send message icon"
             />
-            <div>{this.state.messageError}</div>
-            <br />
-            <button type="submit">Send</button>
-            <button onClick={e => this.handleCancelMatchInvite(e)}>
-              Cancel
-            </button>
-          </form>
-        </div>
+          </button>
+          <button
+            className="friend-btns"
+            onClick={e => this.handleCancelMatchInvite(e)}
+          >
+            <img
+              className="friend-btn-icon cancel-msg-icon"
+              src="https://image.flaticon.com/icons/svg/458/458594.svg"
+              alt="Delete friend icon"
+            />
+          </button>
+        </form>
       );
     }
   }

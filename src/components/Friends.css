@@ -1,13 +1,28 @@
 .friends-section {
-    max-width: 640px;
+    max-width: 600px;
     margin: auto;
     text-align: left;
-    background: #c2c2c2;
+    font-family: 'Josefin Slab', serif;
+}
+
+.friends-h3-wrap {
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .friends-h3 {
     display: inline-block;
-    margin: 1px 1px 1px 1px;
+    margin: auto;
+    padding-top: 13px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: lighter;
+    letter-spacing: 1.4px;
+}
+
+.friends-count {
+    display: inline-block;
+    vertical-align: baseline;
 }
 
 .friends-list {
@@ -19,23 +34,68 @@
     margin-bottom: 7px;
     padding: 10px 2px 10px 3px;
     border: 1px solid black;
+    background: #000000b3;
+}
+
+.send-match-invite-form {
+    max-height: 95px;
+}
+
+.friend-btns, .friend-btn-icon, .submit-match-invite, .submit-match-invite-icon, .cancel-msg {
+    background: none;
 }
 
 .friend-btns {
     margin-top: 5px;
     border: none;
-    background: #c2c2c2;
 }
 
 .friend-btn-icon {
-    width: 30px;
+    width: 25px;
 }
 
-.delete-icon {
+.delete-icon, .cancel-msg {
     width: 23px;
     margin-bottom: 4px;
 }
 
 .friend-btn-icon:hover {
     cursor: pointer;
+}
+
+textarea {
+    resize: none;
+    width: 225px;
+    height: 45px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 2px;
+    background-color: #2d2d2dad;
+    transition: background-color 1s;
+}
+
+textarea:focus {
+    background-color: #ffffff;
+}
+
+.submit-match-invite, .submit-match-invite-icon, .cancel-msg-icon {
+    border: none;
+    width: 25px;
+}
+
+.submit-match-invite-icon, .cancel-msg-icon {
+    position: relative;
+}
+
+.submit-match-invite-icon {
+    bottom: 17px;
+}
+
+.submit-match-invite:focus {
+    outline: none;
+}
+
+.cancel-msg-icon {
+    bottom: 16px;
+    left: 11px;
 }
