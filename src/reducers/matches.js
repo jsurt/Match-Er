@@ -78,18 +78,12 @@ export const matchReducer = (state = initialState, action) => {
             };
           } else if (match.id === id && newData.comments.content.length > 0) {
             console.log(match.comments);
-            // console.log(
-            //   (newData.comments = match.comments.concat(newData.comments))
-            // );
             newData.comments = match.comments.concat(newData.comments);
             return {
               ...match,
               ...newData
             };
           } else {
-            console.log(newData.comments.content);
-            console.log(newData.comments);
-            console.log(newData.comments.content.length);
             newData.comments = [];
             return {
               ...match,
@@ -98,13 +92,7 @@ export const matchReducer = (state = initialState, action) => {
           }
         });
       };
-      //console.log(updateMatch(dataObj));
       console.log(state);
-      // console.log(
-      //   Object.assign({}, state, {
-      //     matches: updateMatch(dataObj)
-      //   })
-      // );
       return Object.assign({}, state, {
         matches: updateMatch(dataObj)
       });
