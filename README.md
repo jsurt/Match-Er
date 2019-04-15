@@ -2,6 +2,8 @@
 
 https://intense-headland-64831.herokuapp.com
 
+To demo, use username: demo123 and password: password
+
 # API
   npm install
   connect app to MongoDB
