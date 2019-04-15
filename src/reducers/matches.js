@@ -87,7 +87,6 @@ export const matchReducer = (state = initialState, action) => {
               ...newData
             };
           } else {
-            alert("uh oh");
             console.log(newData.comments.content);
             console.log(newData.comments);
             console.log(newData.comments.content.length);
