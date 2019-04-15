@@ -149,9 +149,6 @@ class Signup extends React.Component {
   }
 
   render() {
-    // const arrowImgStyle = {
-    //   transform: this.state.showStateSelect ? "rotate(90deg)" : "rotate(0deg)"
-    // };
     return (
       <React.Fragment>
         <div className="landing-background-1">
@@ -223,7 +220,7 @@ class Signup extends React.Component {
                   </div>
                   <br />
                   <input
-                    type="text"
+                    type="password"
                     id="password"
                     placeholder="Password"
                     className="signup-input"
@@ -240,7 +237,7 @@ class Signup extends React.Component {
                   </div>
                   <br />
                   <input
-                    type="text"
+                    type="password"
                     id="confirm-password"
                     placeholder="Confirm password"
                     className="signup-input"

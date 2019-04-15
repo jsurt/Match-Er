@@ -12,9 +12,9 @@ export default class SentMatch extends React.Component {
       sentAt,
       datePlayed
     } = this.props;
-    const receiverId = this.props.receiverId._id;
-    const senderId = this.props.senderId._id;
-    const { username } = this.props.receiverId;
+    // const receiverId = this.props.receiverId._id;
+    // const senderId = this.props.senderId._id;
+    const { username } = this.props.receiverId ? this.props.receiverId : "";
     if (!isAccepted) {
       return (
         <React.Fragment>

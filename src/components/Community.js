@@ -13,11 +13,11 @@ import "./Community.css";
 class Community extends React.Component {
   componentDidMount() {
     console.log(this.props.community.filter);
+    this.props.dispatch(getAllUsers()).then(() => console.log("Got all users"));
     this.props.dispatch(userLoginSuccess());
     this.props.dispatch(getUserData()).then(() => {
       console.log("Got data");
     });
-    this.props.dispatch(getAllUsers()).then(() => console.log("Got all users"));
   }
   handleChangeFilter(event) {
     console.log("Changing filter to" + event.target.value);
@@ -66,7 +66,6 @@ class Community extends React.Component {
                 </span>
               </div>
               <UserList
-                userId={this.props.user.id}
                 filter={this.props.community.filter}
                 users={this.props.community.users}
                 userState={this.props.user.location}

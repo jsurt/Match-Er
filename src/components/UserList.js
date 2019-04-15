@@ -16,7 +16,7 @@ export default class UserList extends React.Component {
     const { filter, userState } = this.props;
     console.log(filter, userState);
     const users = this.props.users.users ? this.props.users.users : [];
-    //console.log(...users);
+    console.log(users);
     if (filter === "state") {
       console.log("Filtering by state");
       const filteredUsers = users.filter((user, index) => {
