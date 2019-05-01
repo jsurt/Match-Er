@@ -23,21 +23,9 @@ class App extends React.Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <PrivateRoute
-            authed={this.props.auth.loggedIn}
-            path="/dashboard"
-            component={Dashboard}
-          />
-          <PrivateRoute
-            authed={this.props.auth.loggedIn}
-            path="/matches"
-            component={MatchesDashboard}
-          />
-          <PrivateRoute
-            authed={this.props.auth.loggedIn}
-            path="/community"
-            component={Community}
-          />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/matches" component={MatchesDashboard} />
+          <Route exact path="/community" component={Community} />
         </React.Fragment>
       </Router>
     );

@@ -33,10 +33,10 @@ export default class SentMatch extends React.Component {
       );
     } else if (isCompleted) {
       const giveOutcome = (username, score) => {
-        if (score.isWon) {
-          return `You lost to ${username} ${score.score}`;
-        } else {
+        if (score.isWon === true) {
           return `You won against ${username} ${score.score}`;
+        } else {
+          return `You lost to ${username} ${score.score}`;
         }
       };
       return (
