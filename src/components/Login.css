@@ -21,6 +21,13 @@
     font-family: 'Josefin Slab', serif;
 }
 
+.demo-info {
+    font-size: 13px; 
+    font-family: 'Josefin Slab', serif;
+    color: #c7ff39;
+    text-decoration: underline #ffffff;;
+}
+
 .signup-link, .landing-link {
     color: #ffffff;
     border-bottom: 1px solid #ffffff;

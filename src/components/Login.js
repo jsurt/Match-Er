@@ -69,7 +69,6 @@ class Login extends React.Component {
                     placeholder="Username"
                     className="login-input"
                     name="username"
-                    value="demo123"
                     onChange={e => {
                       this.handleChange(e);
                     }}
@@ -81,7 +80,6 @@ class Login extends React.Component {
                     placeholder="Password"
                     className="login-input"
                     name="password"
-                    value="password"
                     onChange={e => {
                       this.handleChange(e);
                     }}
@@ -91,6 +89,11 @@ class Login extends React.Component {
                     {this.state.blankFieldErr}
                     {this.state.loginError}
                   </div>
+
+                  <span className="demo-info">
+                    Use "demo123" and "password" for a quick trial
+                  </span>
+                  <br />
                   <input
                     type="image"
                     src="https://image.flaticon.com/icons/svg/137/137621.svg"
