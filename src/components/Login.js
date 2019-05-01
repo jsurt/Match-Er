@@ -69,6 +69,7 @@ class Login extends React.Component {
                     placeholder="Username"
                     className="login-input"
                     name="username"
+                    value="demo123"
                     onChange={e => {
                       this.handleChange(e);
                     }}
@@ -80,6 +81,7 @@ class Login extends React.Component {
                     placeholder="Password"
                     className="login-input"
                     name="password"
+                    value="password"
                     onChange={e => {
                       this.handleChange(e);
                     }}
