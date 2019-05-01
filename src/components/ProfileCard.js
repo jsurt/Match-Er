@@ -6,55 +6,33 @@ import "./ProfileCard.css";
 
 class ProfileCard extends React.Component {
   render() {
+    console.log(this.props.userId);
     console.log(this.props.matches);
     const fullName = `${this.props.firstname} ${this.props.lastname}`;
     let lost = 0;
     let won = 0;
-    const lostMatches = this.props.matches.forEach(match => {
-      if (match.score === null) {
-        console.log(match.receiverId._id);
-        return match;
-      } else if (this.props.userId === match.receiverId._id) {
-        if (!match.score.isWon) {
-          console.log("won");
-        } else {
-          console.log("lost");
-          lost++;
-        }
-      } else if (this.props.userId === match.senderId._id) {
-        if (!match.score.isWon) {
-          console.log("lost");
-          lost++;
-        } else {
-          console.log("won");
-        }
+    const completedMatches = [];
+    this.props.matches.forEach(match => {
+      console.log(match.score);
+      if (match.score) {
+        completedMatches.push(match);
       }
-      console.log(lost);
-      return lost;
+      return completedMatches;
     });
-    const wonMatches = this.props.matches.forEach(match => {
-      let lost = 0;
-      let won = 0;
-      if (match.score === null) {
-        console.log(match.receiverId._id);
-        return match;
-      } else if (this.props.userId === match.receiverId._id) {
-        if (!match.score.isWon) {
-          console.log("won");
+    completedMatches.forEach(match => {
+      if (match.senderId._id === this.props.userId) {
+        if (match.score.isWon) {
           won++;
         } else {
-          console.log("lost");
+          lost++;
         }
-      } else if (this.props.userId === match.senderId._id) {
+      } else {
         if (!match.score.isWon) {
-          console.log("lost");
-        } else {
-          console.log("won");
           won++;
+        } else {
+          lost++;
         }
       }
-      console.log(lost);
-      return won;
     });
     console.log(won, lost);
     return (

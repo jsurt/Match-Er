@@ -35,7 +35,7 @@ export default class ReceivedMatch extends React.Component {
     } else if (isCompleted) {
       console.log(score.score);
       const giveOutcome = (username, score) => {
-        if (score.isWon) {
+        if (score.isWon === true) {
           return `You lost to ${username} ${score.score}`;
         } else {
           return `You won against ${username} ${score.score}`;
