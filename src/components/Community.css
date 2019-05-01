@@ -122,9 +122,14 @@ input[type=radio]:checked + div {
     background-image: linear-gradient(to right,#00e1ff, #4892d1);
 }
 
-.add-friend-icon, .add-friend-btn {
+.add-friend-btn {
+    width: 45px;
+    background: none;
+    border: none;
+}
+
+.add-friend-icon {
     padding-top: 4px;
-    width: 27px;
     background: none;
     border: none;
 }
