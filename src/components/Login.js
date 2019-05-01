@@ -90,7 +90,15 @@ class Login extends React.Component {
                     {this.state.loginError}
                   </div>
 
-                  <span className="demo-info">
+                  <span
+                    className="demo-info"
+                    hidden={
+                      this.state.loginError === "" &&
+                      this.state.blankFieldErr === ""
+                        ? false
+                        : true
+                    }
+                  >
                     Use "demo123" and "password" for a quick trial
                   </span>
                   <br />
