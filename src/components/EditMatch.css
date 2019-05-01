@@ -6,10 +6,33 @@
     font-size: 13px;
 }
 
-.write-score-icon {
-    width: 37px;
+.write-score-icon, .write-score-btn {
+    width: 35px;
+    padding-left: 5px;
+    padding-right: 3px;
+}
+
+.write-score-btn {
+    width: 38px;
+}
+
+.write-comment-btn {
+    width: 35px;
+    padding-left: 7px;
+    padding-right: 0px;
+    margin-right: 0px;
+}
+
+.submit-comment-btn {
+    width: 29px;
+    margin-right: 0px;
     padding-left: 3px;
-    padding-right: 7px;
+    padding-right: 0px;
+}
+
+.cancel-comment-btn {
+    width: 33px;
+    padding-right: 2px;
 }
 
 .match-btn:hover, .edit-match-btn-icon:hover, .matches-btn-icon:hover, .submit-comment-btn:hover, .submit-comment-icon:hover, .cancel-comment-icon:hover, .cancel-comment-btn:hover {
