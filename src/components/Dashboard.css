@@ -16,3 +16,9 @@
 .opaque-background-2 {
     background: #000000a5;
 }
+
+@media only screen and (max-width: 600px) {
+    .background-2 {
+      background: #0f1711;
+    }
+  }

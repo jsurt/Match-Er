@@ -62,7 +62,7 @@
 }
 
 .matches-btn, .matches-btn-icon {
-    width: 40px;
+    /* width: 40px; */
     margin: 3px;
     border: none;
     background: none;
